@@ -1,0 +1,129 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="card">
+                    <div class="card-header in-listing">
+                        <h5 class="card-title in-listing-title">{{ listing.title }}</h5>
+                        <a href="{% url 'category' listing.category %}"><div class="img-text">
+                            <p>{{ listing.get_category_display }}</p>
+                        </div></a>
+                    </div>
+                    <img class="card-img-top" src="{{ listing.img_url }}" alt="Card image cap">
+                    <div class="card-footer">
+                        <a href="{% url 'profile' listing.listing_user.username %}"><small class="text-muted text-right">{{ listing.listing_user.username }}</small></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h6>Starting Bid</h6>
+            <h4>£{{ listing.starting_bid }}</h4>
+            {% if auction.bidding_open == True %}
+                {% if bidding %}
+                    {% if winning.bid_user.id == request.user.id %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        You're currently out in front with a bid of £{{ winning.bid_amount }}!
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        Somebody has trumped your bid - make another offer to get back on top!
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+            <p>{{ listing.description }}</p>
+        </div>
+        <div class="col-md-4">
+            <div class="bid_container">
+            {% if auction.bidding_open == True %}
+                {% if listing.listing_user == request.user %}
+                <form action="{% url 'close' listing.id %}" method="POST">
+                {% csrf_token %}
+                    <input class="btn btn-danger remove" name="close" type="submit" value="Close">
+                </form>
+                {% else %}
+                    <form action="{% url 'bid' listing.id %}" method="POST">
+                    {% csrf_token %}
+                        <div class="form-group" id="bid_form">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                <div class="input-group-text">£</div>
+                            </div>
+                                <input class="form-control" type="number" min="0.01" step="0.01" name="bid_amount" placeholder="Bid Amount...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btn-primary bid" type="submit" value="Bid">
+                        </div>
+                    </form>
+                {% endif %}
+            {% else %}
+                {% if winning.bid_user.id == request.user.id %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        Congratulations! You won the bidding at £{{ winning.bid_amount }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% else %}
+                    {% if bidding %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Thanks for bidding, sorry that you didn't win this time.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endif %}
+                    <button type="button" class="btn btn-danger remove" disabled>Bidding Closed</button>
+                {% endif %}
+            {% endif %}
+            {% if watching %}
+                <form action="{% url 'watching' %}" method="POST">
+                {% csrf_token %}
+                    <input type="hidden" name="auction" value="{{ auction.id }}">
+                    <input class="btn btn-danger remove" type="submit" value="Unwatch">
+                </form>
+                {% else %}
+                <form action="{% url 'watching' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="auction" value="{{ auction.id }}">
+                    <input class="btn btn-light watch" type="submit" value="Watch">
+                </form>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+        {% for comment in comments %}
+        <div class="row align-items-center">
+            <div class="col-12">
+                <div class="card comment">
+                    <div class="card-header">
+                        <a href="{% url 'profile' comment.comment_user.username %}"><small class="text-muted text-right">{{ comment.comment_user.username|title }}:</small></a>
+                    </div>
+                    <div class=card-body>
+                        <p>{{ comment.message }}</p>
+                    </div>
+                    <div class="card-footer text-right">
+                        <small class="text-muted text-right">{{ comment.time_sent|time:"H:i" }} on {{ comment.time_sent|date:"d/m/y" }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="row align-items-center">
+            <div class="comment">
+                {% include 'auctions/comment_form.html' %}
+            </div>
+        </div>
+</div>
+{% endblock %}

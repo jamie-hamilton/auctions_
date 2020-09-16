@@ -1,0 +1,201 @@
+body {
+    padding: 10px;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+h1 {
+    padding: 5px 10px;
+    width: auto;
+    display: inline-block;
+    letter-spacing: 4px;
+}
+
+h1, a:hover, .dropdown-item:hover {
+    color: #fff;
+    background-color: #17a2b8;
+}
+
+h2 {
+    margin: 20px;
+}
+
+.branding {
+    margin: 10px 20px;
+}
+
+.btn {
+    line-height: 1;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #17a2b8;
+    border: 1px solid #17a2b8;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #1393a7;
+    border: 1px solid #128597;
+}
+
+.btn-primary:focus {
+    color: #fff;
+    background-color: #107888;
+    border-color: #107888;
+    box-shadow: 0 0 0 .2rem rgba(23,162,184, .7);
+}
+
+.below-btn {
+    margin-top: 0.5rem;
+}
+
+.form-text {
+    display: block;
+    width: 100%;
+    margin-left: 10px;
+}
+
+.custom-select {
+    width: auto;
+}
+
+.form-control:focus, .custom-select:focus, .nav-link:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: transparent;
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(23,162,184, .7);
+}
+
+a {
+    color: #17a2b8;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    border-radius: .2rem;
+}
+
+.col-md-4 {
+    margin-bottom: 40px;
+}
+
+.card {
+    height: 100%;
+    margin: auto;
+}
+
+.card-text {
+    font-size: small;
+    height: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.img-container {
+    width: auto;
+    height: 250px;
+    position: relative;
+}
+
+@media (max-width: 767px) {
+    
+    .img-container {
+        height: auto;
+    }
+
+}
+
+.img-text {
+    display: inline-block;
+    width: auto;
+}
+
+.img-text p {
+    font-size: x-small;
+    background-color: RGBA(0,0,0, 0.6);
+    color: white; 
+    padding: 2px 5px;
+    border-radius: 10rem;
+    margin: 0;
+}
+
+.img-text p:hover {
+    background-color: RGBA(0,0,0, 0.8);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 10px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-footer {
+    line-height: 0.2;
+}
+
+.in-listing-title {
+    margin-bottom: .25rem;
+}
+
+.in-listing a:hover {
+    background-color: transparent;
+    margin: none;
+}
+
+.abs{
+    position: absolute;
+    
+}
+
+.closed > .card > * {
+    opacity: 0.6;
+}
+
+.bid_container {
+    width: 80%;
+    margin: auto;
+}
+
+.bid, .watch, .remove {
+    width: 100%;
+    margin: 5px auto;
+}
+
+.bid:hover {
+    border: 1px solid white;
+}
+
+.watch {
+    color: #107888;
+    border: 1px solid #107888;
+}
+
+.watch:hover {
+    color: #107888;
+    background-color: rgb(245, 244, 244);
+    border: 1px solid white;
+}
+
+.remove {
+    border: 1px solid #c82333;
+}
+
+.remove:hover {
+    border: 1px solid white;
+}
+
+.comment {
+    width: 90%;
+    margin: 10px auto;
+}

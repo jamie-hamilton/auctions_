@@ -1,0 +1,19 @@
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title"><a href="{% url 'listing' listing.id %}">{{ listing.title }}</a></h5>
+        <h6 class="card-subtitle mb-2 text-muted">From £{{ listing.starting_bid }}</h6>
+    </div>
+    <div class="img-container">
+        <a href="{% url 'category' listing.category %}"><div class="img-text abs">
+            <p>{{ listing.get_category_display }}</p>
+        </div></a>
+        <img class="card-img-top" src="{{listing.img_url}}" alt="Card image cap">
+    </div>
+    <div class="card-body">
+        <p class="card-text text-muted">{{ listing.description }}</p>
+        <div class="text-right"><a href="{% url 'listing' listing.id %}" class="btn btn-primary">View</a></div>
+    </div>
+    <div class="card-footer">
+        <a href="{% url 'profile' listing.listing_user.username %}"><small class="text-muted text-right">{{ listing.listing_user.username }}</small></a>
+    </div>
+</div>

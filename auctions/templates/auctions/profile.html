@@ -1,0 +1,33 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>{{ profile_user.username|title }}'s Listings</h2>
+    <div class="container">
+        <div class="row">
+            {% if not open_auctions and not close_auctions %}
+            <h4 class="col-12 text-muted">Nothing to see here...</h4>
+            <p class="col-12 text-muted">This user hasn't got much going on yet. <a href="{% url 'index' %}">View active listings</a>.</p>
+            {% endif %}
+            {% if open_auctions %}
+            <div class="col-12">
+                <h4>Open Auctions</h4>
+            </div>
+            {% for listing in open_auctions %}
+            <div class="col-md-4">
+                {% include 'auctions/listing_card.html' %}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% if closed_auctions %}
+            <div class="col-12">
+                <h4><del class="text-muted">Open</del> Closed Auctions</h4>
+            </div>
+            {% for listing in closed_auctions %}
+            <div class="col-md-4 closed">
+                {% include 'auctions/listing_card.html' %}
+            </div>
+            {% endfor %}
+            {% endif %}
+      </div>
+    </div>
+{% endblock %}
