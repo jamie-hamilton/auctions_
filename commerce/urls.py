@@ -19,4 +19,4 @@ from django.urls import include, path
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("auctions.urls"))
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
