@@ -4,6 +4,9 @@ _auctions_ is a marketplace application built with Python and Django, where user
 
 __tldr:__
 - Django! Data models! Forms! Bootstrap! Authentication! Dynamic templating!
+
+- see the finished project [here](https://web50auctions.herokuapp.com) (it'll take a few seconds to get going as it is on a hobby server)
+
 - favourite code snippet:
 ```Python
   if winner == None:
